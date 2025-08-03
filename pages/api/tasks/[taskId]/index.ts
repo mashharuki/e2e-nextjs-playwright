@@ -19,6 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         error: 'You must sign in to access this endpoint',
       })
     }
+    // zodによるリクエストボディのバリデーション
     const validationRes = taskIdSchema.safeParse(req.query)
     if (!validationRes.success) {
       return res.status(400).send({
@@ -40,6 +41,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         error: 'You must sign in to access this endpoint',
       })
     }
+    // zodによるリクエストボディのバリデーション
     const validationRes = taskIdSchema.safeParse(req.query)
     if (!validationRes.success) {
       return res.status(400).send({
@@ -61,8 +63,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         error: 'You must sign in to access this endpoint',
       })
     }
+    // zodによるリクエストボディのバリデーション
     const queryValidationRes = taskIdSchema.safeParse(req.query)
+    // zodによるリクエストボディのバリデーション
     const updateValidationRes = updateTaskSchema.safeParse(req.body)
+
     if (!queryValidationRes.success || !updateValidationRes.success) {
       return res.status(400).send({
         message: 'Invalid input data',

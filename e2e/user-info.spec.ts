@@ -1,9 +1,13 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
+/**
+ * ユーザー情報の表示に関するE2Eテスト
+ */
 test('Shall github username not visible without session token', async ({
   page,
   context,
 }) => {
+  // クッキーをクリアしてログアウトしている状態にする
   await context.clearCookies()
   await page.goto('/')
   await expect(page.getByRole('heading')).toHaveText('Hello World🚀')

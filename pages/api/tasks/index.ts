@@ -29,6 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         error: 'You must sign in to access this endpoint',
       })
     }
+    // zodによるリクエストボディのバリデーション
     const validationRes = createTaskSchema.safeParse(req.body)
     if (!validationRes.success) {
       return res.status(400).send({

@@ -1,9 +1,10 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
 test('Shall fetched data not visible without session token', async ({
   page,
   context,
 }) => {
+  // クッキーをクリアしてログアウトしている状態にする
   await context.clearCookies()
   await page.goto('/fetch-cc')
   await expect(page.getByRole('heading')).toHaveText('Notes page by CC')
