@@ -1,5 +1,9 @@
-import { test, expect } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 
+/**
+ * ナビゲーションのためのテスト
+ * ナビゲーションバーのリンクをクリックして、各セグメントに移動
+ */
 test('Shall navigate between nav bar by links', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByRole('heading')).toHaveText('Hello World🚀')

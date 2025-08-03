@@ -1,12 +1,18 @@
 'use client'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { signIn, signOut, useSession } from 'next-auth/react'
 import Spinner from './spinner'
 
+/**
+ * ナビゲーションバーコンポーネント
+ * @returns 
+ */
 export default function NavBar() {
   const { data: session, status } = useSession()
+
   const loading = status === 'loading'
+
   return (
     <header>
       <nav className="flex flex-wrap items-center bg-gray-800 p-3 font-bold text-white">
@@ -49,7 +55,10 @@ export default function NavBar() {
         ) : (
           <button
             className="cursor-pointer font-normal text-indigo-500 hover:text-indigo-300"
-            onClick={() => signIn('github')}
+            onClick={() => {
+              // Oatuhプロバイダ GitHubを指定してサインイン
+              signIn('github')
+            }}
           >
             SignIn GitHub
           </button>

@@ -1,10 +1,15 @@
 import prisma from '.'
 import type {
-  UpdateTaskInput,
   CreateTaskInput,
   TaskId,
+  UpdateTaskInput,
 } from '../../schema/task'
 
+/**
+ * タスクを取得するメソッド
+ * @param userId 
+ * @returns 
+ */
 export async function getTasks(userId: string) {
   try {
     const tasks = await prisma.task.findMany({
@@ -20,8 +25,16 @@ export async function getTasks(userId: string) {
     return { error }
   }
 }
+
+/**
+ * 新しくタスクを作成するメソッド
+ * @param task 
+ * @param userId 
+ * @returns 
+ */
 export async function createTask(task: CreateTaskInput, userId: string) {
   try {
+    // prisma経由でDBにタスクを追加
     const createdTask = await prisma.task.create({
       data: {
         ...task,
@@ -37,6 +50,12 @@ export async function createTask(task: CreateTaskInput, userId: string) {
     return { error }
   }
 }
+
+/**
+ * 指定したIDのタスクを取得するメソッド
+ * @param param0 
+ * @returns 
+ */
 export async function getTaskById({ taskId }: TaskId) {
   try {
     const task = await prisma.task.findUnique({
@@ -47,6 +66,12 @@ export async function getTaskById({ taskId }: TaskId) {
     return { error }
   }
 }
+
+/**
+ * 指定いたIDのタスクを削除するメソッド
+ * @param param0 
+ * @returns 
+ */
 export async function deleteTask({ taskId }: TaskId) {
   try {
     const task = await prisma.task.delete({
@@ -57,6 +82,13 @@ export async function deleteTask({ taskId }: TaskId) {
     return { error }
   }
 }
+
+/**
+ * 既存のタスクを更新するメソッド
+ * @param task 
+ * @param param1 
+ * @returns 
+ */
 export async function updateTask(task: UpdateTaskInput, { taskId }: TaskId) {
   try {
     const updatedTask = await prisma.task.update({

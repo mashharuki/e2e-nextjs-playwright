@@ -1,7 +1,12 @@
-import { cookies } from 'next/headers'
 import type { Task } from '@prisma/client'
+import { cookies } from 'next/headers'
 import TaskItem from './task-item'
 
+/**
+ * タスクを取得する非同期関数
+ * @param token 
+ * @returns 
+ */
 async function fetchTasks(token: string | undefined) {
   const res = await fetch(
     `${
@@ -22,9 +27,16 @@ async function fetchTasks(token: string | undefined) {
   return tasks
 }
 
+/**
+ * タスク一覧を表示するコンポーネント
+ * @returns 
+ */
 export default async function TaskList() {
   const nextCookies = cookies()
+  // next-authのセッショントークンを取得
   const token = nextCookies.get('next-auth.session-token')
+
+  // fetchTasksメソッドを呼び出す
   const tasks = await fetchTasks(token?.value)
   return (
     <ul className="my-6 mx-3">

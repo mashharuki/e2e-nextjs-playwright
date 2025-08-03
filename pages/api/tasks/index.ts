@@ -1,11 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth/next'
 import { createTask, getTasks } from '../../../lib/prisma/tasks'
-import { authOptions } from '../auth/[...nextauth]'
 import { createTaskSchema } from '../../../schema/task'
+import { authOptions } from '../auth/[...nextauth]'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  // 認証セッションを取得
+  // セッションがない場合は401エラーを返す
   const session = await unstable_getServerSession(req, res, authOptions)
+  
   if (req.method === 'GET') {
     if (!session) {
       return res.status(401).json({

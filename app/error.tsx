@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * エラー画面用のコンポーネント
+ * @param param0 
+ * @returns 
+ */
 export default function Error({ error }: { error?: Error }) {
   return (
     <div>

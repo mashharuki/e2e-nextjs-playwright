@@ -1,5 +1,6 @@
 version: "3.8"
 services:
+  # Postgres Database Serviceのコンテナ
   dev-postgres:
     image: postgres:14.4-alpine
     ports:

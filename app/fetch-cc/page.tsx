@@ -2,9 +2,15 @@
 import type { Note } from '@prisma/client'
 import { useEffect, useState } from 'react'
 
+/**
+ * FetchCcPageコンポーネント
+ * @returns 
+ */
 export default function FetchCcPage() {
   const [notes, setNotes] = useState<Note[] | null>(null)
+
   useEffect(() => {
+    // クライアントサイドでのデータ取得
     const fetchNotes = async () => {
       const res = await fetch(`/api/notes/`)
       if (res.status == 200) {
@@ -13,6 +19,7 @@ export default function FetchCcPage() {
     }
     fetchNotes()
   }, [])
+  
   return (
     <main className="flex flex-col items-center">
       <h1 className="mt-10 font-bold">Notes page by CC</h1>

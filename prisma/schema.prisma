@@ -5,11 +5,14 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// データソースの設定
 datasource db {
   provider = "postgresql"
+  // 環境変数からデータベースのURLを取得
   url      = env("DATABASE_URL")
 }
 
+// タスクのデータモデル
 model Task {
   id    String @unique @default(uuid())
   title String

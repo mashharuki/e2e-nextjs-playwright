@@ -1,3 +1,7 @@
+/**
+ * ヘッダーコンポーネント
+ * @returns 
+ */
 export default function Head() {
   return (
     <>

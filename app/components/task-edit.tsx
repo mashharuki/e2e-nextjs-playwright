@@ -2,14 +2,25 @@
 import { useRouter } from 'next/navigation'
 import useStore from '../../store'
 
+/**
+ * タスク編集コンポーネント
+ * @returns 
+ */
 export default function TaskEdit() {
   const router = useRouter()
   const { editedTask } = useStore()
+
   const updateEditedTask = useStore((state) => state.updateEditedTask)
   const resetEditedTask = useStore((state) => state.resetEditedTask)
+
+  /**
+   * タスクの新規作成および更新を行うハンドラーメソッド
+   * @param e 
+   */  
   async function submitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (editedTask.id === '') {
+      // 新規タスク作成API呼び出し
       await fetch(`/api/tasks/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -18,6 +29,7 @@ export default function TaskEdit() {
       router.refresh()
       resetEditedTask()
     } else {
+      // タスク更新API呼び出し
       await fetch(`/api/tasks/${editedTask.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

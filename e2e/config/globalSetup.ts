@@ -2,11 +2,17 @@ import { chromium } from '@playwright/test'
 import path from 'node:path'
 import prisma from '../../lib/prisma'
 
+/**
+ * Playwright グローバルセットアップ
+ */
 export default async function globalConfig() {
+  // ストレージ状態の保存先パス
   const storagePath = path.resolve(__dirname, 'storageState.json')
   const date = new Date()
+  // セッションID
   const sessionToken = '9468389e-ff19-4eb4-bf73-b56516e9b7e8'
 
+  // ユーザーのセッションとアカウント情報をデータベースに登録
   await prisma.user.upsert({
     where: {
       email: 'udemy@test.com',
@@ -39,6 +45,7 @@ export default async function globalConfig() {
   })
   const browser = await chromium.launch()
   const context = await browser.newContext()
+  // ローカルホストのストレージ状態を保存
   await context.addCookies([
     {
       name: 'next-auth.session-token',

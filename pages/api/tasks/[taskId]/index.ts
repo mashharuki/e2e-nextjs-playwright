@@ -1,15 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth/next'
-import { authOptions } from '../../auth/[...nextauth]'
 import {
+  deleteTask,
   getTaskById,
   updateTask,
-  deleteTask,
 } from '../../../../lib/prisma/tasks'
-import { updateTaskSchema, taskIdSchema } from '../../../../schema/task'
+import { taskIdSchema, updateTaskSchema } from '../../../../schema/task'
+import { authOptions } from '../../auth/[...nextauth]'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  // 認証セッションを取得
+  // セッションがない場合は401エラーを返す
   const session = await unstable_getServerSession(req, res, authOptions)
+
   if (req.method === 'GET') {
     if (!session) {
       return res.status(401).json({
@@ -30,6 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(500).json({ error: error.message })
     }
   }
+
   if (req.method === 'DELETE') {
     if (!session) {
       return res.status(401).json({
@@ -50,6 +54,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(500).json({ error: error.message })
     }
   }
+  
   if (req.method === 'PUT') {
     if (!session) {
       return res.status(401).json({

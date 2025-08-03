@@ -1,7 +1,7 @@
-import { cookies } from 'next/headers'
-import { notFound } from 'next/navigation'
 import type { Task } from '@prisma/client'
 import { format } from 'date-fns'
+import { cookies } from 'next/headers'
+import { notFound } from 'next/navigation'
 import type { TaskId } from '../../../schema/task'
 
 type PageProps = {
@@ -28,15 +28,24 @@ async function fetchSingleTask(data: { token: string | undefined } & TaskId) {
   return task
 }
 
+/**
+ * Task detail page コンポーネント
+ * @param param0 
+ * @returns 
+ */
 export default async function TaskDetailPage({ params }: PageProps) {
   const nextCookies = cookies()
   const token = nextCookies.get('next-auth.session-token')
+
+  // タスクIDが存在しない場合は404を返す
   const task = await fetchSingleTask({
     token: token?.value,
     taskId: params.taskId,
   })
+
   if (!task) return notFound()
-  return (
+  
+    return (
     <div className="mt-16 p-8">
       <p>Task ID: {task.id}</p>
       <p data-testid="title-dynamic-segment">Title: {task.title}</p>

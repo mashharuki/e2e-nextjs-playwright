@@ -1,15 +1,24 @@
 'use client'
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
+import type { Task } from '@prisma/client'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { TrashIcon, PencilIcon } from '@heroicons/react/24/solid'
-import type { Task } from '@prisma/client'
 import useStore from '../../store'
 
+/**
+ * タスクの内容を表示するコンポーネント
+ * @param task 
+ * @returns 
+ */
 export default function TaskItem(task: Task) {
   const router = useRouter()
   const updateEditedTask = useStore((state) => state.updateEditedTask)
   const resetEditedTask = useStore((state) => state.resetEditedTask)
 
+  /**
+   * タスクの更新を行うハンドラーメソッド
+   * @param data 
+   */
   async function updateTaskHandler(data: { id: string; completed: boolean }) {
     await fetch(`/api/tasks/${data.id}`, {
       method: 'PUT',
@@ -19,12 +28,18 @@ export default function TaskItem(task: Task) {
     router.refresh()
     resetEditedTask()
   }
+
+  /**
+   * タスクの削除を行うハンドラーメソッド
+   * @param id 
+   */
   async function deleteTaskHandler(id: string) {
     await fetch(`/api/tasks/${task.id}`, {
       method: 'DELETE',
     })
     router.refresh()
   }
+  
   return (
     <li className="my-2">
       <input
