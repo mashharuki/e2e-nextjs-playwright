@@ -72,8 +72,25 @@
 
 - Playwrightテスト実行
 
+  テスト実行前にやること
+  - Taskの追加
+    - Taskテーブルにタイトルが `Task 1` のタスクを追加しておくこと
+    - Taskテーブルにタイトルが `Task 2` のタスクを追加しておくこと
+  - Noteの追加
+    - Noteテーブルにタイトルが `Note 1` のNoteを追加しておくこと
+
   ```bash
   bun run test
+  ```
+
+  以下のようになればOK!
+
+  ```bash
+  Running 11 tests using 5 workers
+
+  11 passed (7s)
+
+  Serving HTML report at http://localhost:57286. Press Ctrl+C to quit.
   ```
 
 ## Next.js project setup

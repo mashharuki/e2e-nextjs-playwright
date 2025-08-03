@@ -4,6 +4,8 @@ import z from 'zod'
  * タスク作成時のバリデーションスキーマ
  */
 export const createTaskSchema = z.object({
+  // タイトルは3文字以上
+  // 完了状態はboolean型
   title: z.string().min(3),
   completed: z.boolean(),
 })
@@ -12,6 +14,8 @@ export const createTaskSchema = z.object({
  * タスク更新時のバリデーションスキーマ
  */
 export const updateTaskSchema = z.object({
+  // タイトルは3文字以上、オプション
+  // 完了状態はboolean型、オプション
   title: z.string().min(3).optional(),
   completed: z.boolean().optional(),
 })
@@ -20,6 +24,7 @@ export const updateTaskSchema = z.object({
  * タスクIDのバリデーションスキーマ
  */
 export const taskIdSchema = z.object({
+  // UUID形式のタスクID
   taskId: z.string().uuid(),
 })
 

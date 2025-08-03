@@ -10,6 +10,7 @@ export default function TaskEdit() {
   const router = useRouter()
   const { editedTask } = useStore()
 
+  // storeからの状態更新メソッドを取得
   const updateEditedTask = useStore((state) => state.updateEditedTask)
   const resetEditedTask = useStore((state) => state.resetEditedTask)
 

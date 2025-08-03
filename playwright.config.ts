@@ -13,7 +13,7 @@ const config: PlaywrightTestConfig = {
   retries: 0,
   // テスト対象のアプリケーションのURL
   webServer: {
-    command: 'npm start',
+    command: 'bun run start',
     url: baseURL,
     timeout: 120 * 1000,
     reuseExistingServer: true,

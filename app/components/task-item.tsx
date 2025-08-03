@@ -12,6 +12,7 @@ import useStore from '../../store'
  */
 export default function TaskItem(task: Task) {
   const router = useRouter()
+  // storeからの状態更新メソッドを取得
   const updateEditedTask = useStore((state) => state.updateEditedTask)
   const resetEditedTask = useStore((state) => state.resetEditedTask)
 
@@ -42,6 +43,7 @@ export default function TaskItem(task: Task) {
   
   return (
     <li className="my-2">
+      {/* タスクの完了状態を更新するチェックボックス 状態だけを反転させる */}
       <input
         className="mr-1"
         type="checkbox"

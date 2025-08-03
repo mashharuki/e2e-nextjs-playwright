@@ -14,6 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await unstable_getServerSession(req, res, authOptions)
 
   if (req.method === 'GET') {
+    // セッションがない場合は401エラーを返す
     if (!session) {
       return res.status(401).json({
         error: 'You must sign in to access this endpoint',
@@ -36,6 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (req.method === 'DELETE') {
+    // セッションがない場合は401エラーを返す
     if (!session) {
       return res.status(401).json({
         error: 'You must sign in to access this endpoint',
@@ -58,6 +60,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   
   if (req.method === 'PUT') {
+    // セッションがない場合は401エラーを返す
     if (!session) {
       return res.status(401).json({
         error: 'You must sign in to access this endpoint',

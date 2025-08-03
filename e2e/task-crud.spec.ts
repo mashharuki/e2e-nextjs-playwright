@@ -46,8 +46,8 @@ test('Shall crud operation works properly', async ({ page }) => {
 })
 
 test('Shall task dynamic segment works properly', async ({ page }) => {
-  const taskId1 = '8afd8a5d-bc27-410a-baef-2383a0f39a10'
-  const taskId2 = 'bbca8d05-ca67-4065-843a-e52012c0a5dc'
+  const taskId1 = '7fa22587-12c6-4ebc-a615-4727bd65b17c'
+  const taskId2 = '5af46b98-6cc6-45fc-99b6-15074c0056bd'
   await page.goto('/task-crud')
   await expect(page.getByRole('heading')).toHaveText(
     'Click a title on the left to view detail !'
